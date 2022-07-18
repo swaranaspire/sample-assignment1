@@ -1,18 +1,31 @@
 <div class="parent">
     
-<form>
+<form [formGroup]="registrationForm">
     <h1>Registration Form!</h1>
     <label for="first">Firstname:</label>
-    <input type="text" id="first"><br><br>
+    <input type="text" id="first" placeholder="enter your first name" formControlName="firstname">
+    <div class="errors" *ngIf="registrationForm.get('firstname')?.touched && registrationForm.get('firstname')?.invalid">
+    <p *ngIf="registrationForm.get('firstname')?.errors?.['required']">This field is required</p>
+    </div><br><br>
+
+
     <label for="last">Lastname:</label>
-    <input type="text" id="last"><br><br>
-    <label for="gender">Gender:</label>
+    <input type="text" id="last" placeholder="enter your last name" formControlName="lastname">
+    <div class="errors" *ngIf="registrationForm.get('lastname')?.touched && registrationForm.get('lastname')?.invalid">
+    <p *ngIf="registrationForm.get('lastname')?.errors?.['required']">This field is required</p>
+    </div><br><br>
+
+
+    <label for="gender">Gender: </label>
+    <input type="radio" name="gender" >
+    <label > Male </label>
     <input type="radio" name="gender">
-    <label >Male</label>
-    <input type="radio" name="gender">
-    <label>Female</label><br><br>
+    <label> Female </label><br><br>
     <label>Date of Birth: </label>
-    <input type="date"><br><br>
+    <input type="date" formControlName="birth">
+    <div class="errors" *ngIf="registrationForm.get('birth')?.touched && registrationForm.get('birth')?.invalid">
+        <p *ngIf="registrationForm.get('birth')?.errors?.['required']">This field is required</p>
+        </div><br><br>
     <label>Country: </label>
     <select>
         <Option>India</Option>
@@ -21,8 +34,11 @@
         <Option>Italy</Option>
     </select><br><br>
     <label>Choose File: </label>
-    <input type="file"><br><br>
-<button>Register</button>
+    <input type="file" formControlName="file">
+    <div class="errors" *ngIf="registrationForm.get('file')?.touched && registrationForm.get('file')?.invalid">
+        <p *ngIf="registrationForm.get('file')?.errors?.['required']">JPEG file is required</p>
+        </div><br><br>
+<button (click)="register()" class="btn btn-success">Register</button>
 </form>
 
 </div>
